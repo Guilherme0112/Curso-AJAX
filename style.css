@@ -1,0 +1,14 @@
+.box{
+    width: 100px;
+    height: 150px;
+    border-radius: 7px;
+    background-color: crimson;
+}
+.nome{
+    color: white;
+    font-size: 20px;
+}
+.preco{
+    color: white;
+    font-size: 15px;
+}
