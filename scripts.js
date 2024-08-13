@@ -17,11 +17,15 @@ document.addEventListener('DOMContentLoaded', function(){
                 let html = "";
                 if(Array.isArray(dados)){
                     dados.forEach(dado => {
-                        html += ` <div class="box">
-                                    <p class="nome">${dado.nome}</p>
-                                    <p class="preco">${dado.preco}</p>
-                                    <p class='categoria'>${dado.categoria}</p>
-                                </div>`;
+                        let preco = dado.preco;
+                        preco = preco.toString().replace(/\./g, ',');
+                        html += ` <div class="card m-3" style="width: 18rem;">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Nome: ${dado.nome}</li>
+                                        <li class="list-group-item">Preço: R$${preco}</li>
+                                        <li class="list-group-item">Categoria: ${dado.categoria}</li>
+                                    </ul>
+                                    </div>`;
                     });
                     document.querySelector("#produtos").innerHTML = html;
                 } else {
@@ -32,5 +36,22 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         };
         xhr.send();
+    });
+    document.querySelector('#btn-form').addEventListener('click', function(evento){
+        evento.preventDefault();
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "class/create-class.php", true);
+        xhr.onreadystatechange = function(){
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                } else {
+                    console.error('Erro na requisição:', xhr.statusText);
+                }
+            }
+        }
+        const formData = new FormData(document.querySelector('#form'));
+        xhr.send(formData);
+        // console.log(nome, preco, categoria);
     });
 });
