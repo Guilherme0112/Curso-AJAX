@@ -1,5 +1,5 @@
 <?php
-    include_once "class/conexao-class.php";
+    include_once "conexao-class.php";
     header('Content-Type: application/json');
     
     $con = DB::connect();

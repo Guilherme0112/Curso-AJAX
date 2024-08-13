@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', function(){
+
+    // Vendo dados
+
     const btn = this.querySelector("#btn");
     btn.addEventListener('click', function(){
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", "main.php", true);
+        xhr.open("POST", "class/show-class.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencode");
         xhr.onload = function(){
             if(xhr.status === 200){
@@ -17,16 +20,17 @@ document.addEventListener('DOMContentLoaded', function(){
                         html += ` <div class="box">
                                     <p class="nome">${dado.nome}</p>
                                     <p class="preco">${dado.preco}</p>
+                                    <p class='categoria'>${dado.categoria}</p>
                                 </div>`;
                     });
                     document.querySelector("#produtos").innerHTML = html;
                 } else {
-                    document.querySelector("#produtos").innerHTML = dados.dados;
+                    document.querySelector("#produtos").innerHTML = dados;
                 }
             } else {
                 console.error("Erro", xhr.statusText);
             }
         };
         xhr.send();
-    })
+    });
 });
